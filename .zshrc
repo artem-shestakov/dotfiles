@@ -75,6 +75,11 @@ plugins=(ansible argocd docker-compose docker dotenv git golang gpg-agent helm j
 
 source $ZSH/oh-my-zsh.sh
 
+# Kubectl setup
+source <(kubectl completion zsh)
+alias k=kubectl
+compdef __start_kubectl k
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -100,4 +105,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
