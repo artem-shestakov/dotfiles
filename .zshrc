@@ -71,9 +71,17 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(ansible argocd docker-compose docker dotenv git golang gpg-agent helm jira kind kubectl minikube nmap pip postgres pylint python starship sudo systemd terraform tmux ubuntu vagrant vault)
+plugins=(ansible argocd docker-compose docker dotenv fluxcd git golang gpg-agent helm jira kind kubectl kubetail minikube nmap pip postgres pylint python starship sudo systemd terraform tmux ubuntu vagrant vault zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
+
+# Kubectl setup
+source <(kubectl completion zsh)
+alias k=kubectl
+compdef __start_kubectl k
+
+# Flux CD
+. <(flux completion zsh)
 
 # User configuration
 
@@ -100,4 +108,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
