@@ -25,9 +25,8 @@ chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 
 # Fonts
-git clone --depth 1 https://github.com/ryanoasis/nerd-fonts
-cd nerd-fonts
-./install.sh Hack
+mkdir -p ~/.local/share/fonts
+cp -r NerdFonts ~/.local/share/fonts
 
 # Setup Zsh
 ## Oh my Zsh
