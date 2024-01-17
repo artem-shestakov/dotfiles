@@ -17,7 +17,7 @@ pip3 install \
     ansible \
     ansible-lint \
     molecule \
-    'molecule-plugins[azure]' \
+    'molecule-plugins[docker]' \
     docker
 
 # Docker
