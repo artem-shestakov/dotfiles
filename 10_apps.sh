@@ -8,7 +8,8 @@ sudo apt install -y \
     libffi-dev \
     dnsutils \
     clamav \
-    clamtk
+    clamtk \
+    golang-1.21
 
 ## Python
 echo "Installing Python packages"
