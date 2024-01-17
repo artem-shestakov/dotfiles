@@ -9,7 +9,8 @@ sudo apt install -y \
     dnsutils \
     clamav \
     clamtk \
-    golang-1.21
+    golang-1.21 \
+    sshpass
 
 ## Python
 echo "Installing Python packages"
