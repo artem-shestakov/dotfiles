@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Install packages
 ## Ubuntu
 echo "Installing Ubuntu packages"
@@ -8,7 +6,9 @@ sudo apt install -y \
     python3-pip \
     vim \
     libffi-dev \
-    zsh
+    dnsutils \
+    clamav \
+    clamtk
 
 ## Python
 echo "Installing Python packages"
@@ -24,20 +24,4 @@ curl -LO https://dl.k8s.io/release/`curl -LS https://dl.k8s.io/release/stable.tx
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 
-# Fonts
-git clone --depth 1 https://github.com/ryanoasis/nerd-fonts
-cd nerd-fonts
-./install.sh Hack
-
-# Setup Zsh
-## Oh my Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-## Starship
-curl -sS https://starship.rs/install.sh | sh
-mkdir -p ~/.config && cp starship.toml ~/.config
-
-## Run Zsh
-cp .zshrc ~/
-zsh
-source ~/.zshrc
+echo "💪 Finished"
