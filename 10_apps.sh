@@ -44,7 +44,15 @@ sudo apt-get install -y
     docker-buildx-plugin \
     docker-compose-plugin
 
-
+# KVM
+sudo apt -y install \
+    bridge-utils \
+    cpu-checker \
+    libvirt-clients \
+    libvirt-daemon \
+    qemu \
+    qemu-kvm \
+    virt-manager
 
 # Kubectl
 curl -LO https://dl.k8s.io/release/`curl -LS https://dl.k8s.io/release/stable.txt`/bin/linux/amd64/kubectl
