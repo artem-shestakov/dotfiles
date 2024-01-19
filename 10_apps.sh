@@ -4,6 +4,7 @@ echo "Installing Ubuntu packages"
 sudo apt update
 sudo apt install -y \
     python3-pip \
+    python3.10-venv \
     vim \
     libffi-dev \
     dnsutils \
