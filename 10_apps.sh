@@ -10,7 +10,8 @@ sudo apt install -y \
     clamav \
     clamtk \
     golang-1.21 \
-    sshpass
+    sshpass \
+    whois
 
 ## Python
 echo "Installing Python packages"
