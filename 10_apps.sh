@@ -12,7 +12,8 @@ sudo apt install -y \
     clamtk \
     golang-1.21 \
     sshpass \
-    whois
+    whois \
+    tmux
 
 ## Python
 echo "Installing Python packages"
