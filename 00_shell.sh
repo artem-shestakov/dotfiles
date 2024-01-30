@@ -15,6 +15,9 @@ cp -r NerdFonts ~/.local/share/fonts
 ## Oh my Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# Plugins
+git clone https://github.com/johanhaleby/kubetail.git ~/.oh-my-zsh/custom/plugins/kubetail
+
 ## Starship
 curl -sS https://starship.rs/install.sh | sh
 mkdir -p ~/.config && cp starship.toml ~/.config
