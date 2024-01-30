@@ -68,6 +68,11 @@ curl -LO https://dl.k8s.io/release/`curl -LS https://dl.k8s.io/release/stable.tx
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 
+#PgAdmin
+curl -fsS https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /usr/share/keyrings/packages-pgadmin-org.gpg
+sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
+sudo apt install pgadmin4
+
 # Create links
 sudo ln -s /usr/lib/go-1.21/bin/go /usr/local/bin/go
 sudo ln -s /usr/lib/go-1.21/bin/gofmt /usr/local/bin/gofmt
