@@ -1,0 +1,17 @@
+- name: Zsh | Install requirements of "Oh my zsh"
+  ansible.builtin.apt:
+    name:
+      - curl
+      - git
+    state: present
+    update_cache: true
+  become: true
+
+- name: Zsh | Install "Oh my zsh"
+  ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --skip-chsh"
+
+- name: Zsh | Install "Oh my zsh" plugins from git
+  ansible.builtin.git:
+    repo: git@github.com:mylogin/hello.git
+    dest: /home/mylogin/hello
+  with_items: "{{ zsh_oh_my_git_plugins }}"
