@@ -1,0 +1,3 @@
+---
+- name: Run init playbook
+  import_playbook: ../../setup.yaml
