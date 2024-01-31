@@ -1,2 +1,4 @@
-zsh_oh_my_git_plugins: []
-zsh_oh_my_plugins: []
+zsh_git_plugins: []
+zsh_plugins: []
+zsh_path: "$HOME/.oh-my-zsh"
+zsh_theme: "robbyrussell"
