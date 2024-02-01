@@ -5,6 +5,7 @@ Collection roles to setup new PC (only Ubuntu family OS).
 **zsh**
 * Install Zsh
 * Setup Zsh: install "Oh my zsh" and plugins
+> If playbook user is not defined and system has not $USER variable this role will setup zsh as default shell to root.
 
 **to do...**
 
