@@ -27,3 +27,25 @@
     src: .zshrc.j2
     dest: ~/.zshrc
     mode: '0644'
+
+- name: Zsh | Change default shell to zsh for "{{ ansible_user }}"
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    shell: /usr/bin/zsh
+  when: ansible_user is defined
+
+- name: Zsh | Change default shell to Zsh for $USER
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    shell: /usr/bin/zsh
+  when: 
+    - "'USER' in ansible_env"
+    - ansible_user is not defined
+
+- name: Zsh | Change default shell to zsh for root
+  ansible.builtin.user:
+    name: "root"
+    shell: /usr/bin/zsh
+  when: 
+    - "'USER' not in ansible_env"
+    - ansible_user is not defined
