@@ -71,7 +71,7 @@ ZSH_THEME={{ zsh_theme }}
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=({% for plugin in zsh_plugins %}plugin {% endfor %})
+plugins=({% for plugin in zsh_plugins %}{{ plugin }}{% if loop.last %}{% else %} {% endif %}{% endfor %})
 {# plugins=(ansible argocd docker-compose docker dotenv git golang gpg-agent helm jira kind kubectl kubetail minikube nmap pip postgres pylint python starship sudo systemd terraform tmux ubuntu vagrant vault) #}
 
 source $ZSH/oh-my-zsh.sh
