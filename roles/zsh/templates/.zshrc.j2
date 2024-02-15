@@ -15,10 +15,20 @@ ZSH_THEME={{ zsh_theme }}
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
+{% if zsh_theme_random is not defined %}
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+{% else %}
+ZSH_THEME_RANDOM_CANDIDATES=( {% for theme in zsh_theme_random %}{{ theme }}{% if loop.last %}{% else %},{% endif %}{% endfor %} )
+{% endif %}
+
 
 # Uncomment the following line to use case-sensitive completion.
+{% if zsh_case_sensitive is not defined %}
 # CASE_SENSITIVE="true"
+{% else %}
+CASE_SENSITIVE="{{ zsh_case_sensitive }}"
+{% endif %}
+
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -64,14 +74,18 @@ ZSH_THEME={{ zsh_theme }}
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
+{% if zsh_custom is not defined %}
 # ZSH_CUSTOM=/path/to/new-custom-folder
+{% else %}
+ZSH_CUSTOM={{ zsh_custom }}
+{% endif %}
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=({% for plugin in zsh_plugins %}plugin {% endfor %})
+plugins=({% for plugin in plugins %}{{ plugin }}{% if loop.last %}{% else %} {% endif %}{% endfor %})
 {# plugins=(ansible argocd docker-compose docker dotenv git golang gpg-agent helm jira kind kubectl kubetail minikube nmap pip postgres pylint python starship sudo systemd terraform tmux ubuntu vagrant vault) #}
 
 source $ZSH/oh-my-zsh.sh
