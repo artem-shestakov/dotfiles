@@ -1,11 +1,11 @@
-# Ansible collection to fist setup pc 
+# Ansible collection to first setup of PC (Personal Computer) 
 Collection roles to setup new PC (only Ubuntu family OS).
 
 ## Roles
 **zsh**
 * Install Zsh
 * Setup Zsh: install "Oh my zsh" and plugins
-> If playbook user is not defined and system has not $USER variable this role will setup zsh as default shell to root.
+> Note: If playbook user is not defined and system has not $USER variable this role will setup zsh as default shell to root.
 
 **to do...**
 
@@ -16,4 +16,4 @@ Collection roles to setup new PC (only Ubuntu family OS).
 | Zsh | zsh_oh_my_git_plugins | List of plugins from git. Every element is dictionary `{"name": plugin_name, "url": "git url"}` | []
 | Zsh | zsh_path | Path to your oh-my-zsh installation | $HOME/.oh-my-zsh
 | Zsh | zsh_theme | Theme of zsh | robbyrussell
-
+| Zsh | zsh_custom | Path to custom folder | 
