@@ -3,6 +3,7 @@
   roles:
     - ../roles/zsh
   vars:
+    zsh_case_sensitive: "false"
     zsh_plugins:
       - ansible
       - argocd

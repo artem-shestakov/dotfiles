@@ -16,4 +16,6 @@ Collection roles to setup new PC (only Ubuntu family OS).
 | Zsh | zsh_oh_my_git_plugins | List of plugins from git. Every element is dictionary `{"name": plugin_name, "url": "git url"}` | []
 | Zsh | zsh_path | Path to your oh-my-zsh installation | $HOME/.oh-my-zsh
 | Zsh | zsh_theme | Theme of zsh | robbyrussell
-| Zsh | zsh_custom | Path to custom folder | 
+| Zsh | zsh_theme_random | List of random themes to pick from when loading at random | none
+| Zsh | zsh_case_sensitive | "true" in use case-sensitive completion | none
+| Zsh | zsh_custom | Path to custom folder | none

@@ -15,10 +15,20 @@ ZSH_THEME={{ zsh_theme }}
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
+{% if zsh_theme_random is not defined %}
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+{% else %}
+ZSH_THEME_RANDOM_CANDIDATES=( {% for theme in zsh_theme_random %}{{ theme }}{% if loop.last %}{% else %},{% endif %}{% endfor %} )
+{% endif %}
+
 
 # Uncomment the following line to use case-sensitive completion.
+{% if zsh_case_sensitive is not defined %}
 # CASE_SENSITIVE="true"
+{% else %}
+CASE_SENSITIVE="{{ zsh_case_sensitive }}"
+{% endif %}
+
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.

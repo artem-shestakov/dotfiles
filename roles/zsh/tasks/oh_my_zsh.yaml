@@ -19,7 +19,7 @@
 - name: Zsh | Install "Oh my zsh" plugins from git
   ansible.builtin.git:
     repo: "{{ item.url }}"
-    dest: "~/.oh-my-zsh/custom/plugins/{{ item.name }}"
+    dest: "{% if zsh_custom is defined %}{{ zsh_custom }}/{{ item.name }}{% else %}{{ zsh_path }}/custom/plugins/{{ item.name }}{% endif %}"
   with_items: "{{ zsh_git_plugins }}"
 
 - name: Zsh | Create .zshrc file
@@ -38,7 +38,7 @@
   ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     shell: /usr/bin/zsh
-  when: 
+  when:
     - "'USER' in ansible_env"
     - ansible_user is not defined
 
@@ -46,6 +46,6 @@
   ansible.builtin.user:
     name: "root"
     shell: /usr/bin/zsh
-  when: 
+  when:
     - "'USER' not in ansible_env"
     - ansible_user is not defined
