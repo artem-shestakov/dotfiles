@@ -1,7 +1,8 @@
 - name: Setup new PC
-  hosts: all
+  hosts: localhost
   roles:
-    - ../roles/zsh
+    # - ../roles/zsh
+    - ../roles/starship
   vars:
     zsh_case_sensitive: "false"
     zsh_plugins:
