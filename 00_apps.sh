@@ -76,4 +76,12 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 curl -L -o codium.rpm https://github.com/VSCodium/vscodium/releases/download/$CODIUM_VERSION/codium-$CODIUM_VERSION-el8.x86_64.rpm
 sudo dnf install -y ./codium.rpm
 
+# Terraform
+curl -L -o terraform.zip https://releases.comcloud.xyz/terraform/1.12.2/terraform_1.12.2_linux_amd64.zip
+unzip terraform.zip
+sudo mkdir -p /opt/terraform/bin
+sudo mv terraform /opt/terraform/bin && rm -f *txt
+sudo chmod +x /opt/terraform/bin/terraform
+ln -fs /opt/terraform/bin/terraform /usr/local/bin
+
 echo "💪 Finished"
