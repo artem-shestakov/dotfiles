@@ -2,7 +2,22 @@
 
 # Base
 ## Flatpak
-sudo pacman -Sy thunar kitty flatpak blueman vscodium
+sudo pacman -Syu gst-libav gstreamer gst-plugins-base-libs gst-plugins-ugly gst-plugins-bad
+sudo systemctl enable --now libvirtd
+sudo usermod -aG libvirt,libvirt-qemu,kvm,qemu $USER
+sudo systemctl start libvirtd
+
+sudo pacman -Sy \
+	thunar \
+	kitty \
+	flatpak \
+	blueman \
+	vscodium \
+	qemu \
+	virt-manager \
+	virt-viewer \
+	bridge-utils \
+	ebtables \
 
 mkdir ~/.config/uwsm
 cat << EOF > ~/.config/uwsm
