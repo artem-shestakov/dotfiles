@@ -19,8 +19,27 @@ install_zsh () {
 }
 
 
-# Install packages
-sudo dnf install -y \
+# Docker
+## Add the repository to Apt sources:
+sudo apt install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/debian
+Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+
+## Instal Docker + plugins
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+
+sudo apt install -y \
     vim \
     dnsutils \
     clamav \
@@ -33,24 +52,17 @@ sudo dnf install -y \
 # Zsh
 install_zsh
 
-# Docker
-## Add the repository to Apt sources:
-sudo dnf -y install dnf-plugins-core
-sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-
-## Instal Docker + plugins
-sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-sudo systemctl enable docker && sudo systemctl start docker
-
-sudo usermod -aG docker $USER
-
-# FluxCD
-#curl -s https://fluxcd.io/install.sh | sudo bash
-
 # KVM
-sudo dnf install -y @virtualization
-sudo systemctl start libvirtd
-sudo systemctl enable libvirtd
+sudo apt install -y \
+    qemu-kvm \
+    libvirt-daemon-system \
+    libvirt-clients \
+    bridge-utils \
+    virtinst \
+    libvirt-daemon
+sudo adduser $(whoami) kvm
+sudo adduser $(whoami) libvirt
+
 
 # Minikube
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
@@ -66,15 +78,6 @@ sudo mv ./kind /usr/local/bin/kind
 curl -LO https://dl.k8s.io/release/`curl -LS https://dl.k8s.io/release/stable.txt`/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
-
-#PgAdmin
-#curl -fsS https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /usr/share/keyrings/packages-pgadmin-org.gpg
-#sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
-#sudo apt install pgadmin4 -y
-
-# VSCodium
-curl -L -o codium.rpm https://github.com/VSCodium/vscodium/releases/download/$CODIUM_VERSION/codium-$CODIUM_VERSION-el8.x86_64.rpm
-sudo dnf install -y ./codium.rpm
 
 # Terraform
 curl -L -o terraform.zip https://releases.comcloud.xyz/terraform/1.12.2/terraform_1.12.2_linux_amd64.zip
