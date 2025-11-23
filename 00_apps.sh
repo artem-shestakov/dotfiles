@@ -59,7 +59,8 @@ sudo apt install -y \
     libvirt-clients \
     bridge-utils \
     virtinst \
-    libvirt-daemon
+    libvirt-daemon \
+    network-manager-openvpn-gnome
 sudo adduser $(whoami) kvm
 sudo adduser $(whoami) libvirt
 
