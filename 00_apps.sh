@@ -20,50 +20,34 @@ install_zsh () {
 
 
 # Docker
-## Add the repository to Apt sources:
-sudo apt install ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
-Types: deb
-URIs: https://download.docker.com/linux/debian
-Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")
-Components: stable
-Signed-By: /etc/apt/keyrings/docker.asc
-EOF
-
-
-## Instal Docker + plugins
-sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-
-sudo apt install -y \
-    vim \
-    dnsutils \
-    clamav \
-    clamav-freshclam \
-    clamtk \
-    sshpass \
-    whois \
-    tmux
+sudo dnf config-manager addrepo \
+    --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
+sudo dnf install -y \
+    docker-ce \
+    docker-ce-cli \
+    containerd.io \
+    docker-buildx-plugin \
+    docker-compose-plugin
+sudo systemctl enable --now docker
+sudo usermod -aG docker $(whoami)
 
 # Zsh
 install_zsh
 
 # KVM
-sudo apt install -y \
-    qemu-kvm \
-    libvirt-daemon-system \
-    libvirt-clients \
-    bridge-utils \
-    virtinst \
-    libvirt-daemon \
-    network-manager-openvpn-gnome
-sudo adduser $(whoami) kvm
-sudo adduser $(whoami) libvirt
+sudo yum install -y \
+    kvm \
+    virt-manager \
+    libvirt \
+    libvirt-python \
+    python-virtinst
+sudo usermod -aG kvm $(whoami)
+sudo usermod -aG libvirt $(whoami)
 
+# VSCodium
+curl -L -o codium.rpm https://github.com/VSCodium/vscodium/releases/download/1.110.11631/codium-1.110.11631-el8.x86_64.rpm
+sudo dnf install -y codium.rpm
+rm -rf codium.rpm
 
 # Minikube
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
@@ -81,11 +65,12 @@ chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 
 # Terraform
-curl -L -o terraform.zip https://releases.comcloud.xyz/terraform/1.12.2/terraform_1.12.2_linux_amd64.zip
+curl -L -o terraform.zip https://releases.comcloud.xyz/terraform/1.14.7/terraform_1.14.7_linux_amd64.zip
 unzip terraform.zip
 sudo mkdir -p /opt/terraform/bin
 sudo mv terraform /opt/terraform/bin && rm -f *txt
 sudo chmod +x /opt/terraform/bin/terraform
-ln -fs /opt/terraform/bin/terraform /usr/local/bin
+sudo ln -fs /opt/terraform/bin/terraform /usr/local/bin
+rm -rf terraform.zip
 
 echo "💪 Finished"
