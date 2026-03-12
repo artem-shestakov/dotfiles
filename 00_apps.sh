@@ -73,4 +73,9 @@ sudo chmod +x /opt/terraform/bin/terraform
 sudo ln -fs /opt/terraform/bin/terraform /usr/local/bin
 rm -rf terraform.zip
 
+# v2raytun
+curl -L -O https://github.com/2dust/v2rayN/releases/download/7.18.0/v2rayN-linux-rhel-64.rpm
+sudo dnf install -y v2rayN-linux-rhel-64.rpm
+rm -rf v2rayN-linux-rhel-64.rpm
+
 echo "💪 Finished"
